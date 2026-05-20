@@ -3,6 +3,8 @@ from ui.views.fft_lab_view import FFTLabView
 from ui.views.generator_view import GeneratorView
 from ui.views.theory_view import TheoryView
 from ui.views.references_view import ReferencesView
+from ui.views.image_fft_view import ImageFFTView
+
 
 class MainWindow(ctk.CTk):
     def __init__(self):
@@ -33,6 +35,10 @@ class MainWindow(ctk.CTk):
         self.nav_buttons["fft"] = ctk.CTkButton(self.navbar, text="FFT Lab", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("fft"))
         self.nav_buttons["fft"].pack(side="left", padx=5)
 
+        # Linha corrigida (indentada corretamente para dentro do __init__)
+        self.nav_buttons["image_fft"] = ctk.CTkButton(self.navbar, text="Criptografia 2D", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("image_fft"))
+        self.nav_buttons["image_fft"].pack(side="left", padx=5)
+
         self.nav_buttons["generator"] = ctk.CTkButton(self.navbar, text="Sintetizador", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("generator"))
         self.nav_buttons["generator"].pack(side="left", padx=5)
 
@@ -42,14 +48,13 @@ class MainWindow(ctk.CTk):
         self.nav_buttons["references"] = ctk.CTkButton(self.navbar, text="Referências", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("references"))
         self.nav_buttons["references"].pack(side="left", padx=5)
 
-        # Botão de Tema (Modo Claro/Escuro) alinhado à direita
         # Botão de Tema (Modo Claro/Escuro) alinhado à direita com text_color corrigido
         self.appearance_mode_btn = ctk.CTkButton(
             self.navbar,
             text="Modo Claro",
             width=100,
             fg_color="transparent",
-            text_color=("black", "white"), # <-- A mágica acontece aqui: Preto no Claro, Branco no Escuro
+            text_color=("black", "white"),
             border_width=1,
             command=self.toggle_appearance_mode
         )
@@ -66,6 +71,7 @@ class MainWindow(ctk.CTk):
         # Instanciando Telas
         self.frames = {}
         self.frames["fft"] = FFTLabView(self.main_container)
+        self.frames["image_fft"] = ImageFFTView(self.main_container)
         self.frames["generator"] = GeneratorView(self.main_container)
         self.frames["theory"] = TheoryView(self.main_container)
         self.frames["references"] = ReferencesView(self.main_container)
@@ -74,14 +80,12 @@ class MainWindow(ctk.CTk):
 
     def select_frame(self, name):
         """Alterna a tela e atualiza o estado ativo da Navbar"""
-        # Atualiza as cores do botão (Active State)
         for btn_name, btn in self.nav_buttons.items():
             if btn_name == name:
-                btn.configure(fg_color=("#06b6d4", "#06b6d4"), text_color="white") # Cor ativa
+                btn.configure(fg_color=("#06b6d4", "#06b6d4"), text_color="white")
             else:
-                btn.configure(fg_color="transparent", text_color=("gray10", "gray90")) # Cor neutra
+                btn.configure(fg_color="transparent", text_color=("gray10", "gray90"))
 
-        # Esconde e mostra os frames
         for frame in self.frames.values():
             frame.grid_forget()
         self.frames[name].grid(row=0, column=0, sticky="nsew")
