@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Test-Path \"C:\\\\Users\\\\ragoz\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe\"; [Environment]::GetEnvironmentVariable\\(\"Path\", \"User\"\\))",
+      "Bash(grep -v -E '^env$')"
+    ]
+  }
+}
