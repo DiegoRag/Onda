@@ -4,6 +4,8 @@ from ui.views.generator_view import GeneratorView
 from ui.views.theory_view import TheoryView
 from ui.views.references_view import ReferencesView
 from ui.views.image_fft_view import ImageFFTView
+from ui.views.voice_crypto_view import VoiceCryptoView
+from ui.views.ofdm_transmission_view import OFDMTransmissionView
 
 
 class MainWindow(ctk.CTk):
@@ -39,6 +41,12 @@ class MainWindow(ctk.CTk):
         self.nav_buttons["image_fft"] = ctk.CTkButton(self.navbar, text="Criptografia 2D", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("image_fft"))
         self.nav_buttons["image_fft"].pack(side="left", padx=5)
 
+        self.nav_buttons["voice"] = ctk.CTkButton(self.navbar, text="Voz Criptografada", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("voice"))
+        self.nav_buttons["voice"].pack(side="left", padx=5)
+
+        self.nav_buttons["ofdm"] = ctk.CTkButton(self.navbar, text="OFDM Transmissão", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("ofdm"))
+        self.nav_buttons["ofdm"].pack(side="left", padx=5)
+
         self.nav_buttons["generator"] = ctk.CTkButton(self.navbar, text="Sintetizador", fg_color="transparent", text_color=("gray10", "gray90"), command=lambda: self.select_frame("generator"))
         self.nav_buttons["generator"].pack(side="left", padx=5)
 
@@ -72,6 +80,8 @@ class MainWindow(ctk.CTk):
         self.frames = {}
         self.frames["fft"] = FFTLabView(self.main_container)
         self.frames["image_fft"] = ImageFFTView(self.main_container)
+        self.frames["voice"] = VoiceCryptoView(self.main_container)
+        self.frames["ofdm"] = OFDMTransmissionView(self.main_container)
         self.frames["generator"] = GeneratorView(self.main_container)
         self.frames["theory"] = TheoryView(self.main_container)
         self.frames["references"] = ReferencesView(self.main_container)

@@ -3,8 +3,10 @@ import sounddevice as sd
 from scipy import signal
 import scipy.io.wavfile as wavfile
 
+import global_configs
+
 class AudioGenerator:
-    def __init__(self, sample_rate=44100):
+    def __init__(self, sample_rate=global_configs.SYNTH_SAMPLE_RATE):
         # 44100 Hz é o padrão de qualidade de CD de áudio.
         # Significa que o som tem 44.100 "pontos" por segundo.
         self.sample_rate = sample_rate
@@ -71,6 +73,6 @@ class AudioGenerator:
         """
         # Para salvar em WAV padrão, o áudio precisa ser convertido 
         # de Float (0.0 a 1.0) para Inteiros de 16 bits (-32768 a 32767)
-        audio_int16 = np.int16(final_wave_array * 32767)
+        audio_int16 = np.int16(final_wave_array * global_configs.INT16_MAX)
         wavfile.write(filename, self.sample_rate, audio_int16)
         print(f"Áudio salvo com sucesso em: {filename}")

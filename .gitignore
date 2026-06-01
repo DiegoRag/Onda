@@ -1,0 +1,31 @@
+# Python — caches e bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Build / distribuição
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Gravações descartáveis (não confundir com assets/*.wav, que são do projeto)
+AUDIO_SAMPLES/
+
+# Variáveis de ambiente / segredos
+.env
+*.env
+
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
